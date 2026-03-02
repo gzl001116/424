@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>星河书城 · 付费小说站</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>星河书城</h1>
+        <p>精品连载 · 章节付费解锁 · 多渠道支付</p>
+      </div>
+      <div class="user-panel">
+        <span id="welcomeText">游客模式</span>
+        <button id="loginBtn">登录 / 注册</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="novel-list card">
+        <h2>热门小说</h2>
+        <ul id="novelList"></ul>
+      </section>
+
+      <section class="reader card">
+        <div class="reader-head">
+          <h2 id="bookTitle">请选择一本小说</h2>
+          <div class="wallet">
+            余额：<strong id="balanceText">0</strong> 星币
+          </div>
+        </div>
+
+        <section class="pay-box">
+          <h3>充值中心</h3>
+          <p>支持 Visa、Mastercard、支付宝、微信、PayPal。</p>
+          <div class="pay-controls">
+            <label>
+              充值金额
+              <select id="rechargeAmount">
+                <option value="20">20 星币</option>
+                <option value="50" selected>50 星币</option>
+                <option value="100">100 星币</option>
+                <option value="200">200 星币</option>
+              </select>
+            </label>
+            <label>
+              支付方式
+              <select id="paymentMethod">
+                <option value="visa">Visa</option>
+                <option value="mastercard">Mastercard</option>
+                <option value="alipay">支付宝</option>
+                <option value="wechat">微信支付</option>
+                <option value="paypal">PayPal</option>
+              </select>
+            </label>
+            <button id="rechargeBtn">确认充值</button>
+          </div>
+          <p id="lastPaymentText" class="hint">暂无充值记录。</p>
+        </section>
+
+        <section class="payout-box">
+          <h3>作者结算设置（每月1号自动打款）</h3>
+          <div class="pay-controls">
+            <label>
+              自动打款渠道
+              <select id="payoutChannel">
+                <option value="paypal">PayPal</option>
+                <option value="wise">Wise</option>
+                <option value="crypto">虚拟币账户</option>
+              </select>
+            </label>
+            <label>
+              收款账号
+              <input id="payoutAccount" placeholder="例如：author@paypal.com / wise-id / wallet-address" />
+            </label>
+            <button id="savePayoutBtn">保存设置</button>
+          </div>
+          <p id="nextPayoutText" class="hint"></p>
+          <div id="payoutLogs" class="log-list"></div>
+        </section>
+
+        <div id="chapterList" class="chapter-list"></div>
+
+        <article id="chapterContent" class="chapter-content">
+          <p>选择章节后开始阅读。</p>
+        </article>
+      </section>
+    </main>
+
+    <dialog id="authDialog">
+      <form method="dialog" id="authForm">
+        <h3>登录 / 注册</h3>
+        <label>
+          用户名
+          <input name="username" placeholder="请输入用户名" required minlength="2" />
+        </label>
+        <menu>
+          <button value="cancel">取消</button>
+          <button value="submit">确定</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
