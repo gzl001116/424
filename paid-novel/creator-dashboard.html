@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>星河书城 · 创作者后台</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>创作者后台</h1>
+        <p>FanSky 风格工作台 · 订阅数据 · 结算设置</p>
+      </div>
+      <div class="user-panel">
+        <a class="ghost-link" href="./index.html">返回阅读站</a>
+      </div>
+    </header>
+
+    <main class="dashboard-layout">
+      <section class="card">
+        <h2>数据总览</h2>
+        <div class="stats-grid">
+          <div class="stat-item"><span>支持者</span><strong>1,284</strong></div>
+          <div class="stat-item"><span>本月收入</span><strong>¥36,420</strong></div>
+          <div class="stat-item"><span>待结算</span><strong id="pendingPayout">0 星币</strong></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>订阅方案（FanSky风格）</h2>
+        <div class="tiers-grid">
+          <div class="tier-item"><h3>青铜档</h3><p>¥18 / 月</p><small>抢先看 2 章</small></div>
+          <div class="tier-item"><h3>白银档</h3><p>¥38 / 月</p><small>抢先看 5 章 + 幕后番外</small></div>
+          <div class="tier-item"><h3>黄金档</h3><p>¥88 / 月</p><small>抢先看全部 + 读者群</small></div>
+        </div>
+      </section>
+
+      <section class="card payout-box">
+        <h2>作者结算设置（每月1号自动打款）</h2>
+        <div class="pay-controls">
+          <label>自动打款渠道
+            <select id="payoutChannel">
+              <option value="paypal">PayPal</option>
+              <option value="wise">Wise</option>
+              <option value="crypto">虚拟币账户</option>
+            </select>
+          </label>
+          <label>收款账号
+            <input id="payoutAccount" placeholder="author@paypal.com / wise-id / wallet-address" />
+          </label>
+          <button id="savePayoutBtn">保存设置</button>
+        </div>
+        <p id="nextPayoutText" class="hint"></p>
+        <div id="payoutLogs" class="log-list"></div>
+      </section>
+    </main>
+
+    <script src="./creator-dashboard.js"></script>
+  </body>
+</html>

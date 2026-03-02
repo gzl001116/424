@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>星河书城 · 付费小说站</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>星河书城</h1>
+        <p>精品连载 · 章节付费解锁 · 多渠道支付</p>
+      </div>
+      <div class="user-panel">
+        <a class="ghost-link" href="./creator-dashboard.html">创作者后台</a>
+        <span id="welcomeText">游客模式</span>
+        <button id="loginBtn">邮箱 / Google 登录</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="novel-list card">
+        <h2>热门小说</h2>
+        <ul id="novelList"></ul>
+      </section>
+
+      <section class="reader card">
+        <div class="reader-head">
+          <h2 id="bookTitle">请选择一本小说</h2>
+          <div class="wallet">余额：<strong id="balanceText">0</strong> 星币</div>
+        </div>
+
+        <section class="pay-box">
+          <h3>充值中心</h3>
+          <p>支持 Visa、Mastercard、支付宝、微信、PayPal。</p>
+          <div class="pay-controls">
+            <label>充值金额
+              <select id="rechargeAmount">
+                <option value="20">20 星币</option>
+                <option value="50" selected>50 星币</option>
+                <option value="100">100 星币</option>
+                <option value="200">200 星币</option>
+              </select>
+            </label>
+            <label>支付方式
+              <select id="paymentMethod">
+                <option value="visa">Visa</option>
+                <option value="mastercard">Mastercard</option>
+                <option value="alipay">支付宝</option>
+                <option value="wechat">微信支付</option>
+                <option value="paypal">PayPal</option>
+              </select>
+            </label>
+            <button id="rechargeBtn">确认充值</button>
+          </div>
+          <p id="lastPaymentText" class="hint">暂无充值记录。</p>
+        </section>
+
+        <div id="chapterList" class="chapter-list"></div>
+
+        <article id="chapterContent" class="chapter-content">
+          <p>选择章节后开始阅读。</p>
+        </article>
+      </section>
+    </main>
+
+    <dialog id="authDialog">
+      <form method="dialog" id="authForm">
+        <h3>邮箱登录</h3>
+        <label>邮箱<input name="email" type="email" placeholder="you@example.com" required /></label>
+        <label>密码<input name="password" type="password" placeholder="请输入密码" required minlength="6" /></label>
+        <menu>
+          <button value="cancel">取消</button>
+          <button value="submit">邮箱登录</button>
+        </menu>
+      </form>
+      <div class="oauth-wrap">
+        <button id="googleLoginBtn" class="google-btn" type="button">使用 Google 账号登录（自动拉取邮箱）</button>
+      </div>
+    </dialog>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
