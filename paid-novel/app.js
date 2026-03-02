@@ -89,6 +89,15 @@ function loginAs(userText) {
   renderHeader();
 }
 
+
+function mockGoogleProfileFetch() {
+  const googleAccounts = ["reader.auto@gmail.com", "author.auto@gmail.com"];
+  const picked = googleAccounts[Math.floor(Math.random() * googleAccounts.length)];
+  return new Promise((resolve) => {
+    setTimeout(() => resolve({ email: picked }), 600);
+  });
+}
+
 function currentNovel() {
   return novels.find((item) => item.id === state.currentNovelId);
 }
@@ -267,17 +276,22 @@ dom.authForm.addEventListener("submit", (event) => {
   loginAs(`邮箱用户：${email}`);
 });
 
-dom.googleLoginBtn.addEventListener("click", () => {
-  const googleEmail = prompt("请输入你的 Google 邮箱（示例：name@gmail.com）");
-  if (!googleEmail) {
-    return;
+dom.googleLoginBtn.addEventListener("click", async () => {
+  dom.googleLoginBtn.disabled = true;
+  const originalText = dom.googleLoginBtn.textContent;
+  dom.googleLoginBtn.textContent = "Google 登录中...";
+
+  try {
+    const profile = await mockGoogleProfileFetch();
+    if (!profile || !isEmail(profile.email)) {
+      alert("Google 账号拉取失败，请稍后重试。");
+      return;
+    }
+    loginAs(`Google用户：${profile.email}`);
+  } finally {
+    dom.googleLoginBtn.disabled = false;
+    dom.googleLoginBtn.textContent = originalText;
   }
-  const normalized = googleEmail.trim();
-  if (!isEmail(normalized)) {
-    alert("Google 邮箱格式不正确。");
-    return;
-  }
-  loginAs(`Google用户：${normalized}`);
 });
 
 dom.rechargeBtn.addEventListener("click", () => {
