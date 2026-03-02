@@ -14,7 +14,7 @@
       </div>
       <div class="user-panel">
         <span id="welcomeText">游客模式</span>
-        <button id="loginBtn">登录 / 注册</button>
+        <button id="loginBtn">邮箱 / Google 登录</button>
       </div>
     </header>
 
@@ -91,16 +91,23 @@
 
     <dialog id="authDialog">
       <form method="dialog" id="authForm">
-        <h3>登录 / 注册</h3>
+        <h3>邮箱登录</h3>
         <label>
-          用户名
-          <input name="username" placeholder="请输入用户名" required minlength="2" />
+          邮箱
+          <input name="email" type="email" placeholder="you@example.com" required />
+        </label>
+        <label>
+          密码
+          <input name="password" type="password" placeholder="请输入密码" required minlength="6" />
         </label>
         <menu>
           <button value="cancel">取消</button>
-          <button value="submit">确定</button>
+          <button value="submit">邮箱登录</button>
         </menu>
       </form>
+      <div class="oauth-wrap">
+        <button id="googleLoginBtn" class="google-btn" type="button">使用 Google 账号登录</button>
+      </div>
     </dialog>
 
     <script src="./app.js"></script>

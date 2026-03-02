@@ -65,7 +65,8 @@ const dom = {
   nextPayoutText: document.getElementById("nextPayoutText"),
   payoutLogs: document.getElementById("payoutLogs"),
   authDialog: document.getElementById("authDialog"),
-  authForm: document.getElementById("authForm")
+  authForm: document.getElementById("authForm"),
+  googleLoginBtn: document.getElementById("googleLoginBtn")
 };
 
 function persist() {
@@ -75,6 +76,17 @@ function persist() {
   localStorage.setItem("paid_novel_payout_settings", JSON.stringify(state.payoutSettings));
   localStorage.setItem("paid_novel_payout_logs", JSON.stringify(state.payoutLogs));
   localStorage.setItem("paid_novel_last_payment", JSON.stringify(state.lastPayment));
+}
+
+function isEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+function loginAs(userText) {
+  state.user = userText;
+  persist();
+  dom.authDialog.close();
+  renderHeader();
 }
 
 function currentNovel() {
@@ -239,14 +251,33 @@ dom.loginBtn.addEventListener("click", () => {
 
 dom.authForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  const username = new FormData(dom.authForm).get("username").toString().trim();
-  if (!username) {
+  const formData = new FormData(dom.authForm);
+  const email = String(formData.get("email") || "").trim();
+  const password = String(formData.get("password") || "").trim();
+
+  if (!isEmail(email)) {
+    alert("请输入有效邮箱地址。");
     return;
   }
-  state.user = username;
-  persist();
-  dom.authDialog.close();
-  renderHeader();
+  if (password.length < 6) {
+    alert("密码至少 6 位。");
+    return;
+  }
+
+  loginAs(`邮箱用户：${email}`);
+});
+
+dom.googleLoginBtn.addEventListener("click", () => {
+  const googleEmail = prompt("请输入你的 Google 邮箱（示例：name@gmail.com）");
+  if (!googleEmail) {
+    return;
+  }
+  const normalized = googleEmail.trim();
+  if (!isEmail(normalized)) {
+    alert("Google 邮箱格式不正确。");
+    return;
+  }
+  loginAs(`Google用户：${normalized}`);
 });
 
 dom.rechargeBtn.addEventListener("click", () => {

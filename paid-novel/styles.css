@@ -206,3 +206,14 @@ menu {
     grid-template-columns: 1fr;
   }
 }
+
+.oauth-wrap {
+  margin-top: 8px;
+}
+
+.google-btn {
+  width: 100%;
+  background: #ffffff;
+  color: #111827;
+  border: 1px solid #d1d5db;
+}
